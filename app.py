@@ -28,16 +28,13 @@ RTC_CONFIGURATION = RTCConfiguration({"iceServers": [{"urls": ["stun:stun.l.goog
 class Faceemotion(VideoTransformerBase):
     def transform(self, frame):
         img = frame.to_ndarray(format="bgr24")
-        dst = cv2.resize(img, (800, 400))
+        small_frame = cv2.resize(img, (0, 0), fx=0.25, fy=0.25)
         #image gray
-        #img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        img_gray = cv2.cvtColor(dst, cv2.COLOR_BGR2GRAY)
+        #img_gray = cv2.cvtColor(small_frame, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(
             image=img_gray, scaleFactor=1.3, minNeighbors=5)
         for (x, y, w, h) in faces:
-            #cv2.rectangle(img=img, pt1=(x, y), pt2=(
-            #    x + w, y + h), color=(255, 0, 0), thickness=2)
-            cv2.rectangle(img=dst, pt1=(x, y), pt2=(
+            cv2.rectangle(img=small_frame, pt1=(x, y), pt2=(
                 x + w, y + h), color=(255, 0, 0), thickness=2)
             roi_gray = img_gray[y:y + h, x:x + w]
             roi_gray = cv2.resize(roi_gray, (48, 48), interpolation=cv2.INTER_AREA)
@@ -50,11 +47,9 @@ class Faceemotion(VideoTransformerBase):
                 finalout = emotion_dict[maxindex]
                 output = str(finalout)
             label_position = (x, y)
-            #cv2.putText(img, output, label_position, cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-            cv2.putText(dst, output, label_position, cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+            cv2.putText(small_frame, output, label_position, cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 255, 0), 1)
 
-        #return img
-        return dst
+        return small_frame
 
 def main():
     # Face Analysis Application #
