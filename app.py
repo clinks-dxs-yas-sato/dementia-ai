@@ -60,7 +60,7 @@ class Faceemotion(VideoTransformerBase):
 def main():
     # Face Analysis Application #
     st.title("認知症予防AIアプリ")
-    activiteis = ["Home", "表情検出", "About"]
+    activiteis = ["Home", "身体機能：表情検出", "About"]
     choice = st.sidebar.selectbox("Select Activity", activiteis)
     st.sidebar.markdown(
         """ Developed by 尾松紀依・佐藤能臣    
