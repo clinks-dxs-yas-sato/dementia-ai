@@ -60,7 +60,7 @@ class Faceemotion(VideoTransformerBase):
 def main():
     # Face Analysis Application #
     st.title("認知症予防AIアプリ")
-    activiteis = ["Home", "身体機能：表情検出", "About"]
+    activiteis = ["Home", "身体機能：表情検出"]
     choice = st.sidebar.selectbox("Select Activity", activiteis)
     st.sidebar.markdown(
         """ Developed by 尾松紀依・佐藤能臣    
@@ -77,28 +77,9 @@ def main():
                  """)
     elif choice == "身体機能：表情検出":
         st.header("ライブ")
-        st.write("Click on start to use webcam and detect your face emotion")
+        st.write("笑顔を作って、「Happy」が表示されれば合格です！")
         webrtc_streamer(key="example", mode=WebRtcMode.SENDRECV, rtc_configuration=RTC_CONFIGURATION,
                         video_processor_factory=Faceemotion)
-
-    elif choice == "About":
-        st.subheader("About this app")
-        html_temp_about1= """<div style="background-color:#6D7B8D;padding:10px">
-                                    <h4 style="color:white;text-align:center;">
-                                    Real time face emotion detection application using OpenCV, Custom Trained CNN model and Streamlit.</h4>
-                                    </div>
-                                    </br>"""
-        st.markdown(html_temp_about1, unsafe_allow_html=True)
-
-        html_temp4 = """
-                             		<div style="background-color:#98AFC7;padding:10px">
-                             		<h4 style="color:white;text-align:center;">To Be Announced </h4>
-                             		<h4 style="color:white;text-align:center;">Thanks for Visiting</h4>
-                             		</div>
-                             		<br></br>
-                             		<br></br>"""
-
-        st.markdown(html_temp4, unsafe_allow_html=True)
 
     else:
         pass
