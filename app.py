@@ -59,11 +59,11 @@ class Faceemotion(VideoTransformerBase):
 
 def main():
     # Face Analysis Application #
-    st.title("リアルタイム表情検出")
+    st.title("認知症予防AIアプリ")
     activiteis = ["Home", "表情検出", "About"]
     choice = st.sidebar.selectbox("Select Activity", activiteis)
     st.sidebar.markdown(
-        """ Developed by Yasuomi D. Sato    
+        """ Developed by 尾松紀依・佐藤能臣    
             Email : yas-sato@clinks.jp  """)
     if choice == "Home":
         html_temp_home1 = """<div style="background-color:#6D7B8D;padding:10px">
@@ -75,7 +75,7 @@ def main():
         st.write("""
                  To be announced
                  """)
-    elif choice == "表情検出":
+    elif choice == "身体機能：表情検出":
         st.header("ライブ")
         st.write("Click on start to use webcam and detect your face emotion")
         webrtc_streamer(key="example", mode=WebRtcMode.SENDRECV, rtc_configuration=RTC_CONFIGURATION,
